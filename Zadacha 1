@@ -1,0 +1,20 @@
+//Задана матрица A размерности nxn. Определить минимальный элемент среди элементов матрицы, расположенных выше побочной диагонали. 
+void Solve()
+{
+    Task("DArray7");
+    int n;
+    pt >> n;
+    int* mas = new int[n * n];
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            pt >> *(mas + i * n + j);
+        }
+    }
+    int min = *(mas + 0 + 0);
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (*(mas + i * n + (j)) < min) min = *(mas + i * n + (j));
+        }
+    }
+    pt << min;
+}

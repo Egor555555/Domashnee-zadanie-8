@@ -1,0 +1,45 @@
+//Проверить, является ли матрица A(n,n) диагональной (все элементы нули, кроме главной диагонали), 
+//единичной (все элементы нули, на главной диагонали только единицы) или нулевой (все элементы нули).
+//Формат ответа: 1-диагональная, 2-единичная, 3-нулевая.
+#include "pt4.h"
+using namespace std;
+
+void Solve()
+{
+    Task("DArray17");
+    int N;
+    pt >> N;
+    int** A = (int**)malloc(N * sizeof(int*));
+    for (int i = 0; i < N; i++)
+        A[i] = (int*)malloc(N * sizeof(int));
+    bool flagD = true;
+    bool flagE = true;
+    bool flag0 = true;
+    for (int i = 0; i < N;i++)
+        for (int j = 0; j < N;j++)
+        {
+            pt >> A[i][j];
+            if (A[i][i] == 1 && A[i][j] == 0) {
+                flagD = false;
+                flag0 = false;
+            }
+            if (i != j) {
+                if ((A[i][i] > 1 && A[i][j] == 0)) {
+                    flagE = false;
+                    flag0 = false;
+                }
+            }
+            else {
+                if (A[i][j] == 0 && A[i][i] == 0) {
+                    flagD = false;
+                    flagE = false;
+                }
+            }
+        }
+    if (flagD == true)
+        pt << 1;
+    if (flagE == true)
+        pt << 2;
+    if (flag0 == true)
+        pt << 3;
+}
